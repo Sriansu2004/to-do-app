@@ -1,19 +1,22 @@
-import React from 'react';
+import { useTodoContext } from '../context/TodoContext';
 
-const FilterBar: React.FC<{ filter: string; setFilter: (filter: string) => void }> = ({ filter, setFilter }) => {
-    return (
-        <div className="filter-bar">
-            <button onClick={() => setFilter('all')} className={filter === 'all' ? 'active' : ''}>
-                All
-            </button>
-            <button onClick={() => setFilter('completed')} className={filter === 'completed' ? 'active' : ''}>
-                Completed
-            </button>
-            <button onClick={() => setFilter('active')} className={filter === 'active' ? 'active' : ''}>
-                Active
-            </button>
-        </div>
-    );
+const FilterBar = () => {
+  const { state, setFilter } = useTodoContext();
+  const current = state.filter;
+
+  return (
+    <div className="filter-bar">
+      <button className={`filter-button ${current === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
+        All
+      </button>
+      <button className={`filter-button ${current === 'active' ? 'active' : ''}`} onClick={() => setFilter('active')}>
+        Active
+      </button>
+      <button className={`filter-button ${current === 'completed' ? 'active' : ''}`} onClick={() => setFilter('completed')}>
+        Completed
+      </button>
+    </div>
+  );
 };
 
 export default FilterBar;

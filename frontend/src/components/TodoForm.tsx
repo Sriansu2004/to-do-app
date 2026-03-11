@@ -1,29 +1,32 @@
-import React, { useState, useContext } from 'react';
-import { TodoContext } from '../context/TodoContext';
+import { useState } from 'react';
+import { useTodoContext } from '../context/TodoContext';
 
-const TodoForm: React.FC = () => {
-    const [task, setTask] = useState('');
-    const { addTodo } = useContext(TodoContext);
+const TodoForm = () => {
+  const [title, setTitle] = useState('');
+  const { addTodo } = useTodoContext();
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (task.trim()) {
-            addTodo(task);
-            setTask('');
-        }
-    };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (title.trim()) {
+      addTodo(title.trim());
+      setTitle('');
+    }
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={task}
-                onChange={(e) => setTask(e.target.value)}
-                placeholder="Add a new todo"
-            />
-            <button type="submit">Add Todo</button>
-        </form>
-    );
+  return (
+    <form className="todo-form" onSubmit={handleSubmit}>
+      <input
+        className="todo-input"
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="What needs to be done?"
+      />
+      <button className="todo-button" type="submit">
+        Add Todo
+      </button>
+    </form>
+  );
 };
 
 export default TodoForm;

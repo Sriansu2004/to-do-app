@@ -1,22 +1,23 @@
-import React from 'react';
-import { Todo } from '../types';
+import { Todo } from '../context/TodoContext';
 
 interface TodoItemProps {
   todo: Todo;
-  onToggleComplete: (id: string) => void;
+  onToggle: (id: string) => void;
   onDelete: (id: string) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggleComplete, onDelete }) => {
+const TodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
   return (
     <div className={`todo-item ${todo.completed ? 'completed' : ''}`}>
       <input
         type="checkbox"
         checked={todo.completed}
-        onChange={() => onToggleComplete(todo.id)}
+        onChange={() => onToggle(todo.id)}
       />
       <span>{todo.title}</span>
-      <button onClick={() => onDelete(todo.id)}>Delete</button>
+      <button className="delete-button" onClick={() => onDelete(todo.id)}>
+        ✕
+      </button>
     </div>
   );
 };

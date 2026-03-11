@@ -1,5 +1,3 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TodoProvider } from './context/TodoContext';
 import Header from './components/Header';
 import TodoList from './components/TodoList';
@@ -7,17 +5,17 @@ import TodoForm from './components/TodoForm';
 import FilterBar from './components/FilterBar';
 import './styles/App.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <TodoProvider>
-      <Router>
-        <div className="app">
-          <Header />
-          <FilterBar />
+      <div className="app">
+        <Header />
+        <div className="container">
           <TodoForm />
+          <FilterBar />
           <TodoList />
         </div>
-      </Router>
+      </div>
     </TodoProvider>
   );
 };
